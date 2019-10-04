@@ -9,6 +9,12 @@ $server->register(
 	array("return"=>"xsd:integer")
 );
 
+$server->register(
+	"getEmployees",
+	array(),
+	array("return"=>"xsd:string")
+);
+
 $post = file_get_contents('php://input');
 $server->service($post);
 ?>
