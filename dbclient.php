@@ -2,7 +2,7 @@
 include_once 'lib/nusoap.php';
 $client = new nusoap_client("http://localhost/soap/server.php?wsdl");
 $employees = $client->call("getEmployees", array());
-$emparr = explode(",",$employees);
+$emparr = json_decode($employees);
 $count = 1;
 ?>
 <!doctype html>
@@ -27,14 +27,13 @@ $count = 1;
 			{
 				foreach($emparr as $emp)
 				{
-					$e = explode("#", $emp);
 				?>
 				<tr>
 					<td><?php echo $count; ?></td>
-					<td><?php echo $e[1]; ?></td>
-					<td><?php echo $e[2]; ?></td>
-					<td><?php echo $e[3]; ?></td>
-					<td><?php echo $e[4]; ?></td>
+					<td><?php echo $emp->emp_name; ?></td>
+					<td><?php echo $emp->emp_email; ?></td>
+					<td><?php echo $emp->emp_phone; ?></td>
+					<td><?php echo $emp->emp_salary; ?></td>
 				</tr>
 				<?php
 					$count++;
